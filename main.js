@@ -1,5 +1,26 @@
 import App from './App'
 
+import {
+  $http
+} from '@escook/request-miniprogram'
+
+uni.$http = $http
+$http.baseUrl = 'https://api-hmugo-web.itheima.net'
+$http.beforeRequest = options => {
+  uni.showLoading({
+    title: "数据加载中...."
+  })
+}
+$http.afterRequest = res => {
+  uni.hideLoading()
+  if (res.data.meta.status != 200) {
+    uni.showToast({
+      title: "数据加载失败！"
+    })
+  }
+  return res
+}
+
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
@@ -31,7 +52,7 @@ try {
       });
     },
   });
-} catch (error) { }
+} catch (error) {}
 
 const app = new Vue({
   ...App
@@ -40,7 +61,9 @@ app.$mount()
 // #endif
 
 // #ifdef VUE3
-import { createSSRApp } from 'vue'
+import {
+  createSSRApp
+} from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
   return {
