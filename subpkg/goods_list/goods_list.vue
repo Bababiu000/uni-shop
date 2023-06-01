@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+    GoodsList
   </view>
 </template>
 
@@ -8,8 +8,11 @@
   export default {
     data() {
       return {
-        
+
       };
+    },
+    onLoad(options) {
+
     }
   }
 </script>
