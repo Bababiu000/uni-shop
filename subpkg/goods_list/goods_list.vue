@@ -36,7 +36,7 @@
       }
     },
     onLoad(options) {
-      this.queryObj.query = options.query
+      this.queryObj.query = options.query || ''
       this.queryObj.cid = options.cid || 1
       this.getGoodsList()
     },
