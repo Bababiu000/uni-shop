@@ -144,34 +144,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 40));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 42));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var mySearch = function mySearch() {
+  __webpack_require__.e(/*! require.ensure | uni_modules/components/my-search */ "uni_modules/components/my-search").then((function () {
+    return resolve(__webpack_require__(/*! ../../uni_modules/components/my-search.vue */ 85));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
 var _default = {
+  components: {
+    mySearch: mySearch
+  },
   data: function data() {
     return {
       activeIndex: 0,
@@ -213,6 +194,11 @@ var _default = {
     getCoodsList: function getCoodsList(cat_id) {
       uni.navigateTo({
         url: '/subpkg/goods_list/goods_list?cid=' + cat_id
+      });
+    },
+    toSearch: function toSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search'
       });
     }
   },

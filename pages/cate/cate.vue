@@ -1,32 +1,41 @@
 <template>
-  <view class="cate-container" :style="{height: systemInfo.windowHeight + 'px'}">
-    <scroll-view scroll-y class="left-scroll-view">
-      <view :class="['left-scroll-view-item', index==activeIndex ? 'active' : '' ]" v-for="(item, index) in cateList"
-        :key="item.cat_id" @click="activeChange(index)">
-        {{item.cat_name}}
-      </view>
-    </scroll-view>
-    <scroll-view scroll-y class="right-scroll-view" :scroll-top="scrollTop">
-      <view class="cate-lv2-list">
-        <view class="cate-lv2-item" v-for="(item2, index2) in cateLevel2" :key="item2.cat_id">
-          <view class="cate-lv2-title">
-            {{ item2.cat_name }}
-          </view>
-          <view class="cate-lv3-list">
-            <view class="cate-lv3-item" v-for="(item3, index3) in item2.children" :key="item3.cat_id"
-              @click="getCoodsList(item3.cat_id)">
-              <image :src="item3.cat_icon" mode="scaleToFill"></image>
-              <text> {{ item3.cat_name }} </text>
+  <view>
+   <view class="search-container">
+       <my-search @to-search="toSearch" bgColor="#c00000" radius="25"></my-search>
+    </view>
+    <view class="cate-container" :style="{'height': systemInfo.windowHeight  + 'px'}">
+      <scroll-view scroll-y class="left-scroll-view">
+        <view :class="['left-scroll-view-item', index==activeIndex ? 'active' : '' ]" v-for="(item, index) in cateList"
+          :key="item.cat_id" @click="activeChange(index)">
+          {{item.cat_name}}
+        </view>
+      </scroll-view>
+      <scroll-view scroll-y class="right-scroll-view" :scroll-top="scrollTop">
+        <view class="cate-lv2-list">
+          <view class="cate-lv2-item" v-for="(item2, index2) in cateLevel2" :key="item2.cat_id">
+            <view class="cate-lv2-title">
+              {{ item2.cat_name }}
+            </view>
+            <view class="cate-lv3-list">
+              <view class="cate-lv3-item" v-for="(item3, index3) in item2.children" :key="item3.cat_id"
+                @click="getCoodsList(item3.cat_id)">
+                <image :src="item3.cat_icon" mode="scaleToFill"></image>
+                <text> {{ item3.cat_name }} </text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
 </template>
 
 <script>
+  import mySearch from "../../uni_modules/components/my-search.vue"
   export default {
+    components: {
+      mySearch
+    },
     data() {
       return {
         activeIndex: 0,
@@ -53,6 +62,11 @@
         uni.navigateTo({
           url: '/subpkg/goods_list/goods_list?cid=' + cat_id
         })
+      },
+      toSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
       }
     },
     onLoad() {
@@ -63,6 +77,12 @@
 </script>
 
 <style lang="scss">
+  .search-container {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+  }
+  
   .cate-container {
     display: flex;
     height: 100vh;

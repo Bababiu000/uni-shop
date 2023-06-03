@@ -1,5 +1,8 @@
 <template>
   <view>
+    <view class="search-container">
+      <my-search @to-search="toSearch" bgColor="#c00000" radius="25"></my-search>
+    </view>
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1500" class="swiper-list">
       <swiper-item v-for="(item, index) in swiperList" :key="item.goods_id">
         <view class="swiper-item" @click="swiperClickHandler(item.goods_id)">
@@ -13,7 +16,7 @@
       </view>
     </view>
     <view class="floor-list">
-      <view class="floor-item" v-for="(item, index) in floorList">
+      <view class="floor-item" v-for="(item, index) in floorList" :key="index">
         <view class="floor-title">
           <image :src="item.floor_title.image_src" mode="heightFix"></image>
         </view>
@@ -23,7 +26,7 @@
               :style="{width: item.product_list[0].image_width + 'rpx'}"></image>
           </navigator>
           <view class="right-image-box">
-            <view class="right-image-item" v-for="(product, i2) in item.product_list.slice(1)">
+            <view class="right-image-item" v-for="(product, i2) in item.product_list.slice(1)" :key="i2">
               <navigator :url="product.navigator_url">
                 <image :src="product.image_src" mode="widthFix" :style="{width: product.image_width + 'rpx'}"></image>
               </navigator>
@@ -36,7 +39,11 @@
 </template>
 
 <script>
+  import mySearch from "../../uni_modules/components/my-search.vue"
   export default {
+    components: {
+      mySearch
+    },
     data() {
       return {
         swiperList: [],
@@ -67,7 +74,6 @@
             product.navigator_url = '/subpkg/goods_list/goods_list?' + product.navigator_url.split('?')[1]
           })
         })
-        console.log(this.floorList)
       },
       swiperClickHandler(goods_id) {
         uni.navigateTo({
@@ -79,6 +85,11 @@
           uni.switchTab({
             url: '/pages/cate/cate'
           })
+      },
+      toSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
       }
     },
     onLoad() {
@@ -90,6 +101,12 @@
 </script>
 
 <style lang="scss">
+  .search-container {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  
   .swiper-list {
     height: 300rpx;
 

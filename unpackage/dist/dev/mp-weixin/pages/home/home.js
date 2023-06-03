@@ -160,44 +160,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 40));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 42));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var mySearch = function mySearch() {
+  __webpack_require__.e(/*! require.ensure | uni_modules/components/my-search */ "uni_modules/components/my-search").then((function () {
+    return resolve(__webpack_require__(/*! ../../uni_modules/components/my-search.vue */ 85));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
 var _default = {
+  components: {
+    mySearch: mySearch
+  },
   data: function data() {
     return {
       swiperList: [],
@@ -269,8 +240,7 @@ var _default = {
                     product.navigator_url = '/subpkg/goods_list/goods_list?' + product.navigator_url.split('?')[1];
                   });
                 });
-                console.log(_this3.floorList);
-              case 7:
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -286,6 +256,11 @@ var _default = {
     navClickHandler: function navClickHandler(name) {
       if (name == '分类') uni.switchTab({
         url: '/pages/cate/cate'
+      });
+    },
+    toSearch: function toSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search'
       });
     }
   },
