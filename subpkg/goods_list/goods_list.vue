@@ -7,11 +7,7 @@
 </template>
 
 <script>
-  import myGoods from '@/uni_modules/components/my-goods.vue'
   export default {
-    components: {
-      'my-goods': myGoods
-    },
     data() {
       return {
         queryObj: {
@@ -33,6 +29,7 @@
         this.goodsList = [...this.goodsList, ...res.message.goods]
         this.total = res.message.total
         this.isLoading = false
+        console.log(this.goodsList)
       }
     },
     onLoad(options) {

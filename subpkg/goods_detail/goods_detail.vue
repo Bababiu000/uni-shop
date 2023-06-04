@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import { mapMutations, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -40,7 +41,7 @@
           {
         			icon: 'cart',
         			text: '购物车',
-        			info: 2
+        			info: ''
         	},
         ],
         buttonGroup: [
@@ -58,6 +59,7 @@
       }
     },
     methods: {
+      ...mapMutations('m_cart', ['addToCart']),
       async getGoodsDeatil(goods_id) {
         const {data : res} = await uni.$http.get('/api/public/v1/goods/detail/', {'goods_id': goods_id})
         this.goodsInfo = res.message
@@ -76,11 +78,34 @@
           uni.switchTab({
             url: '/pages/cart/cart'
           })
+      },
+      buttonClick(e) {
+         if(e.content.text == '加入购物车') {
+           const goods = {
+             goods_id: this.goodsInfo.goods_id,
+             goods_name: this.goodsInfo.goods_name,
+             goods_price: this.goodsInfo.goods_price,
+             goods_small_logo: this.goodsInfo.goods_small_logo,
+             goods_count: 1,
+             goods_state: true
+           }
+           this.addToCart(goods)
+         }
       }
     },
     computed: {
       price() {
         return Number(this.goodsInfo.goods_price).toFixed(2)
+      },
+      ...mapGetters('m_cart', ['total'])
+    },
+    watch: {
+      total: {
+        immediate: true,
+        handler(newVal) {
+          const findResult = this.options.find(x => x.text == '购物车')
+          findResult.info = newVal
+        }
       }
     },
     onLoad(options) {

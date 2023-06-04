@@ -1,4 +1,5 @@
 import App from './App'
+import store from './store/store.js'
 
 import {
   $http
@@ -55,6 +56,7 @@ try {
 } catch (error) {}
 
 const app = new Vue({
+  store,
   ...App
 })
 app.$mount()

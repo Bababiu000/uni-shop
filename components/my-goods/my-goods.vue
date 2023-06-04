@@ -1,5 +1,6 @@
 <template>
   <view class="goods-item">
+    <slot name="radio-box"></slot>
     <view class="goods-item-left">
       <image :src="goods.goods_small_logo || defaultPic"></image>
     </view>
@@ -11,6 +12,7 @@
         <view class="goods-price">
            ￥{{price}}
         </view>
+        <slot name="num-box"></slot>
       </view>
     </view>
   </view>
@@ -18,6 +20,7 @@
 
 <script>
 export default {
+  name: "my-goods",
   props: {
     goods: {
       type: Object,
@@ -45,6 +48,7 @@ export default {
     border-bottom: 1px solid #efefef;
     .goods-item-left {
       image {
+        display: block;
         width: 100px;
         height: 100px;
       }
@@ -59,6 +63,8 @@ export default {
         font-size: 13px;
       }
       .goods-info-box {
+        display: flex;
+        justify-content: space-between;
         .goods-price {
           font-size: 16px;
           color: #c00000;

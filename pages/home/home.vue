@@ -39,11 +39,9 @@
 </template>
 
 <script>
-  import mySearch from "../../uni_modules/components/my-search.vue"
+  import tabbarBadge from '@/mixin/tabbar-badge.js'
   export default {
-    components: {
-      mySearch
-    },
+    mixins: [tabbarBadge],
     data() {
       return {
         swiperList: [],
