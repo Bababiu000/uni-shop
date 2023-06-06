@@ -8,6 +8,9 @@ import {
 uni.$http = $http
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'
 $http.beforeRequest = options => {
+  options.header = {
+    Authorization: store.state.m_user.token
+  }
   uni.showLoading({
     title: "数据加载中...."
   })

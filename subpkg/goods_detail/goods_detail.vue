@@ -109,6 +109,7 @@
       }
     },
     onLoad(options) {
+      console.log(options.goods_id);
       this.getGoodsDeatil(options.goods_id)
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <view class="goods-list">
-    <navigator v-for="(goods, index) in goodsList" :key="index" :url="'/subpkg/goods_detail/goods_detail?=' + goods.id">
+    <navigator v-for="(goods, index) in goodsList" :key="index" :url="'/subpkg/goods_detail/goods_detail?goods_id=' + goods.goods_id">
       <my-goods :goods="goods" :key="goods.goods_id"></my-goods>
     </navigator>
   </view>
